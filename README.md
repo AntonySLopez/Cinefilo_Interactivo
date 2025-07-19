@@ -9,7 +9,7 @@
 🎨 Tailwind
 🟢 Node.js
 🚏 Express
-🗄️ MySQL
+🛢️ MSSQL - Motor de base de datos relacional
 🔐 JSON Web Token (JWT)
 🧪 Dotenv (manejo de variables de entorno)
 🧱 Principios SOLID para arquitectura de código
