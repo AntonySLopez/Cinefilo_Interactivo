@@ -20,8 +20,8 @@
 ## 🎯 FUNCIONES Y OBJETIVOS
 
 ```
-(1) 🔐 DB(1)--API(1)--FETCH(1)--(1) =: Iniciar sesión
-(2) 👤 DB(2)--API(2)--FETCH(2)--(2) =: Crear nuevo Usuario
+(1) 🔐 ______DB(1)--API(1)--FETCH(1)--(1) =: Iniciar sesión
+(2) 👤 ______DB(2)--API(2)--FETCH(2)--(2) =: Crear nuevo Usuario
 (3) 🎞️_____________________ FETCH(3)--(3) =: Cargar catálogo de Películas
 (4) 🔍_____________________ FETCH(4)--(4) =: Buscar películas por título (con debounce)
 (5) 📄_______________________________ (5) =: Ver detalles de película
@@ -83,28 +83,41 @@
 
 ```
 📦 CineApp
-|
-├── 📁 backend
-│   ├── 📁 controllers
-│   │   ├── 🔐 authController.js          # login, register
-│   │   ├── ❤️ favoritosController.js     # favoritos
-│   │   ├── 📚 listasController.js        # listas personalizadas
-│   │   └── ⚙️ preferenciasController.js  # tema (claro/oscuro)
-│   ├── 📁 routes
-│   │   ├── 🔐 authRoutes.js              # rutas de login/registro
-│   │   ├── ❤️ favoritosRoutes.js         # rutas de favoritos
-│   │   ├── 📚 listasRoutes.js            # rutas de listas
-│   │   └── ⚙️ preferenciasRoutes.js      # rutas de tema
-│   ├── 📁 database
-│   │   └── 🔌 conexion.js                # conexión SQL
-│   ├── 📁 middlewares
-│   │   └── 🛡️ authMiddleware.js       # JWT validator
-│   ├── 📁 utils
-│   │   └── 🔧 helpers.js              # funciones auxiliares
-│   ├── 🧩 index.js                    # entrada principal del backend
-│   └── 🔐 .env                        # variables de entorno
-│ 
-├── 📁 frontend (no detallado)
+
+├── 📁 src
+│   |
+│   ├── 📁 pages
+│   │   ├── 📁 api
+│   │   │   ├── login.js                   # login,
+│   │   │   ├── register.js                # register,
+│   │   │   ├── 📁 favoritos          # favoritos
+│   │   │   │   ├── GET.js 
+│   │   │   │   └── Update.js 
+│   │   │   ├── 📁 listas             # listas personalizadas
+│   │   │   │   ├── GET.js 
+│   │   │   │   └── Update.js 
+│   │   │   └── 📁 preferencias        # tema (claro/oscuro)
+│   │   │       ├── GET.js 
+│   │   │       └── Update.js 
+│   │   └── 🧩 frontend
+│   ├── 📁 backend
+│   │   ├── 📁 controller
+│   │   │   ├── 🔐 auth.js              # rutas de login/registro
+│   │   │   ├── ❤️ favoritos.js         # rutas de favoritos
+│   │   │   ├── 📚 listas.js            # rutas de listas
+│   │   │   └── ⚙️ preferencias.js      # rutas de tema
+│   │   ├── 📁 database
+│   │   │   └── 🔌 db.js                # conexión SQL
+│   │   ├── 📁 middlewares
+│   │   │   └── 🛡️ authMiddleware.js         # JWT validator
+│   │   ├── 📁 utils
+│   │   │   └── 🔧 helpers.js                # funciones auxiliares
+│   │   └── 🧩 index.js                      # entrada principal del backend
+│   │       
+│   └── 🧩 frontend (carpetas listas para implementar)
+│       
+└── 🔐 .env    
+                        # variables de entorno
 ```
 
 ---
