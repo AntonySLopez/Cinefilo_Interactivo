@@ -85,15 +85,15 @@
 │   |
 │   ├── 📁 pages
 │   │   ├── 📁 api
-│   │   │   ├── login.js                   # login,
-│   │   │   ├── register.js                # register,
-│   │   │   ├── 📁 favoritos          # favoritos
+│   │   │   ├── login.js                # login
+│   │   │   ├── register.js             # register
+│   │   │   ├── 📁 favoritos            # favoritos
 │   │   │   │   ├── GET.js 
 │   │   │   │   └── Update.js 
-│   │   │   ├── 📁 listas             # listas personalizadas
-│   │   │   │   ├── GET.js 
+│   │   │   ├── 📁 listas               # listas personalizadas
+│   │   │   │   ├── GET.js  
 │   │   │   │   └── Update.js 
-│   │   │   └── 📁 preferencias        # tema (claro/oscuro)
+│   │   │   └── 📁 preferencias         # tema (claro/oscuro)
 │   │   │       ├── GET.js 
 │   │   │       └── Update.js 
 │   │   └── 🧩 frontend
@@ -106,14 +106,14 @@
 │   │   ├── 📁 database
 │   │   │   └── 🔌 db.js                # conexión SQL
 │   │   ├── 📁 middlewares
-│   │   │   └── 🛡️ authMiddleware.js         # JWT validator
+│   │   │   └── 🛡️ authMiddleware.js    # JWT validator
 │   │   └── 📁 utils
-│   │       └── 🔧 helpers.js                # funciones auxiliares
+│   │       └── 🔧 helpers.js           # funciones auxiliares
 │   │       
 │   └── 🧩 frontend (carpetas listas para implementar)
 │       
-└── 🔐 .env    
-                        # variables de entorno
+└── 🔐 .env                              # variables de entorno
+
 ```
 
 ---
@@ -139,7 +139,7 @@
 \- `descripcion` (text)
 \- `fecha_creacion` (timestamp)
 
-📊 **Tabla: listas\_peliculas** (relacional)
+📊 **Tabla: peliculas** (relacional)
 \- `id` (PK, int, AI)
 \- `id_lista` (FK)
 \- `id_pelicula` (varchar)
@@ -243,9 +243,9 @@ To learn more about the folder structure of an Astro project, refer to [our guid
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
+| Command                | Action                                           |
+| :--------------------- | :----------------------------------------------- |
+| `pnpm install`         | Installs dependencies                            |
 | `pnpm dev`             | Starts local dev server at `localhost:4321`      |
 | `pnpm build`           | Build your production site to `./dist/`          |
 | `pnpm preview`         | Preview your build locally, before deploying     |
