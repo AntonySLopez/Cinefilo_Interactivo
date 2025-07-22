@@ -1,3 +1,6 @@
+
+## 🚀 Project Structure
+
 ### 🎥 TU BASE DE DATOS DE PELICULAS
 
 # 🎞️ Titulo: Cinefilo Interactivo
@@ -7,12 +10,10 @@
 
 ⚙️ Astro
 🎨 Tailwind
-🟢 Node.js
-🚏 Express
 🛢️ MSSQL - Motor de base de datos relacional
 🔐 JSON Web Token (JWT)
 🧪 Dotenv (manejo de variables de entorno)
-🧱 Principios SOLID para arquitectura de código
+🧱 Principios SOLID para arquitectura de código (lo mejor que se entendio)
 ```
 
 ---
@@ -20,17 +21,17 @@
 ## 🎯 FUNCIONES Y OBJETIVOS
 
 ```
-(1) 🔐 ______DB(1)--API(1)--FETCH(1)--(1) =: Iniciar sesión
-(2) 👤 ______DB(2)--API(2)--FETCH(2)--(2) =: Crear nuevo Usuario
-(3) 🎞️_____________________ FETCH(3)--(3) =: Cargar catálogo de Películas
-(4) 🔍_____________________ FETCH(4)--(4) =: Buscar películas por título (con debounce)
-(5) 📄_______________________________ (5) =: Ver detalles de película
-(6) ⭐______ (6)--FETCH(5)--API(3)--DB(3) =: Cargar lista favoritos
-(7) 🛠️______ (7)--FETCH(6)--API(4)--DB(4) =: Gestionar lista favoritos
-(8) 📚______ (8)--FETCH(7)--API(5)--DB(5) =: Cargar colección de listas de USUARIO
-(9) ✏️______ (9)--FETCH(8)--API(6)--DB(6) =: Gestionar lista de usuario
-(10) ⚙️____ (10)--FETCH(9)--API(7)--DB(7) =: Cargar preferencias de USUARIO
-(11) 🧩____ (11)--FETCH(10)-API(8)--DB(8) =: Gestionar preferencias de USUARIO
+(1) 🔐 ______DB(1)--API(1)--FETCH(1)--FrondEnd(1) =: Iniciar sesión
+(2) 👤 ______DB(2)--API(2)--FETCH(2)--FrondEnd(2) =: Crear nuevo Usuario
+(3) 🎞️_____________________ FETCH(3)--FrondEnd(3) =: Cargar catálogo de Películas
+(4) 🔍_____________________ FETCH(4)--FrondEnd(4) =: Buscar películas por título (con debounce)
+(5) 📄_______________________________ FrondEnd(5) =: Ver detalles de película
+(6) ⭐______ FrondEnd(6)--FETCH(5)--API(3)--DB(3) =: Cargar lista favoritos
+(7) 🛠️______ FrondEnd(7)--FETCH(6)--API(4)--DB(4) =: Gestionar lista favoritos
+(8) 📚______ FrondEnd(8)--FETCH(7)--API(5)--DB(5) =: Cargar colección de listas de USUARIO
+(9) ✏️______ FrondEnd(9)--FETCH(8)--API(6)--DB(6) =: Gestionar lista de usuario
+(10) ⚙️____ FrondEnd(10)--FETCH(9)--API(7)--DB(7) =: Cargar preferencias de USUARIO
+(11) 🧩____ FrondEnd(11)--FETCH(10)-API(8)--DB(8) =: Gestionar preferencias de USUARIO
 ```
 
 ---
@@ -54,12 +55,8 @@
 
 ```
 📂 Manejo de datos de login y registro de USUARIO y gestionar lista de preferencias del mismo mediante:
-    * endPoints ={ 
-        /login = API(1)
-        /register = API(2)
-        /userData = API(3, 5, 7)
-        /gestion = API(4, 6, 8) 
-    }
+    * endPoints y fetch usando API TMDB.
+    * Separacion de responsavilidades frondENd y backEnd
 ```
 
 ---
@@ -110,9 +107,8 @@
 │   │   │   └── 🔌 db.js                # conexión SQL
 │   │   ├── 📁 middlewares
 │   │   │   └── 🛡️ authMiddleware.js         # JWT validator
-│   │   ├── 📁 utils
-│   │   │   └── 🔧 helpers.js                # funciones auxiliares
-│   │   └── 🧩 index.js                      # entrada principal del backend
+│   │   └── 📁 utils
+│   │       └── 🔧 helpers.js                # funciones auxiliares
 │   │       
 │   └── 🧩 frontend (carpetas listas para implementar)
 │       
@@ -154,14 +150,6 @@
 \- `tema` (varchar) — valores posibles: `'oscuro'`, `'claro'`
 
 ---
-
-```
-🔐 Todas las relaciones entre tablas están referenciadas mediante `id_usuario`.
-
-📅 Se usan `timestamp` para registrar fechas automáticamente.
-
-🎬 Las películas se identifican mediante un ID externo (En esta oportunidad es **TMDB**).
-```
 
 ## 🧩 Diseño visual de JSON de FETCH(all)
 
@@ -231,3 +219,39 @@
         ~ password incorrecto
         ~ Error interno en la DB(1)
 ```
+
+# Astro Starter Kit: Basics
+
+```sh
+pnpm create astro@latest -- --template basics
+```
+
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
+[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+
+![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+
+
+```
+
+To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+
+## 🧞 Commands
+
+All commands are run from the root of the project, from a terminal:
+
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `pnpm install`             | Installs dependencies                            |
+| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
+| `pnpm build`           | Build your production site to `./dist/`          |
+| `pnpm preview`         | Preview your build locally, before deploying     |
+| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+
+## 👀 Want to learn more?
+
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
