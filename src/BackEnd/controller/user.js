@@ -13,8 +13,8 @@ async function login(request) {
         const clave = result.recordset[0]?.clave;
         if (!clave) {
             return new Response(JSON.stringify({
-                estatus: 404,
-                error: `Email no encontrado`
+                code: 404,
+                message: `Email no encontrado`
             }), { status: 404 });
         }
 
@@ -23,21 +23,21 @@ async function login(request) {
         if (join) {
             const token = "1234";
             return new Response(JSON.stringify({
-                estatus: 200,
+                code: 200,
                 data: token
             }), { status: 200 });
         } else {
             return new Response(JSON.stringify({
-                estatus: 401,
-                error: `Password incorrecto`
+                code: 401,
+                message: `Password incorrecto`
             }), { status: 401 });
         }
 
     } catch (error) {
         return new Response(JSON.stringify({
-            status: 500,
-            error: `Error en base de datos`
-        }));
+            code: 500,
+            message: `Error en base de datos`
+        }), { status: 500 });
     }
 }
 
@@ -55,20 +55,20 @@ async function login(request) {
 
         if(result){
             return new Response(JSON.stringify({
-                estatus: 200,
-                message: "usuario creado"
-            }));
+                code: 200,
+                message: "Usuario creado"
+            }),{ status:200 });
         }else{
             return new Response(JSON.stringify({
-                estatus: 401,
-                error: `error al guardar`
-            }));
+                code: 401,
+                message: `Error al guardar`
+            }),{ status: 401 });
         };
     }catch(error){
         return new Response(JSON.stringify({
-            estatus: 500,
-            error: `Error en base de datos`
-        }));
+            code: 500,
+            message: `Error en base de datos`
+        }),{ status:500 });
     };
  };
 
