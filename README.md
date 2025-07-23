@@ -95,8 +95,9 @@
 │   │   │   │   └── Update.js 
 │   │   │   └── 📁 preferencias         # tema (claro/oscuro)
 │   │   │       ├── GET.js 
-│   │   │       └── Update.js 
-│   │   └── 🧩 frontend
+│   │           └── Update.js 
+│   ├── 🧩 frontend
+│   │ 
 │   ├── 📁 backend
 │   │   ├── 📁 controller
 │   │   │   ├── 🔐 auth.js              # rutas de login/registro
@@ -219,6 +220,32 @@
         ~ password incorrecto
         ~ Error interno en la DB(1)
 ```
+(2) registro de usuario
+
+    1. EndPoint: POST /api/register
+    2. Objetivo: Permitir que un usuario registrarce
+    3. Entradas esperadas:
+        {
+        "name": "nombres de usuario"
+        "email": "ejemplo@correo.com",
+        "password": "claveSegura123"
+        }
+
+    4. Flujo interno:
+        ~ Validar name email y password
+        ~ Ingresamos datos de usuario nuevo
+        ~ validamos confirmacion
+        ~ Devolver respuesta de confirmacion
+    5. Respuesta esperada:
+        {
+            "estatus": 200,
+            "message": Usuario creado*
+        }
+    6. Errores posibles:
+        ~ Error en agregar nuevo usuario
+        ~ parametros incorectos
+        ~ Error interno en la DB(1) 
+```
 
 # Astro Starter Kit: Basics
 
@@ -236,9 +263,6 @@ pnpm create astro@latest -- --template basics
 
 
 ```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:

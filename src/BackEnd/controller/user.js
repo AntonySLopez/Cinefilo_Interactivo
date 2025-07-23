@@ -1,34 +1,75 @@
-import sql from '../database/db'
+import sql from '../database/db.js'
 
-async function login(request){
-    try{
+// cotroller de login
+
+async function login(request) {
+    try {
         const datos = await request.json();
-        const { email, password } = datos.body;
+        const { email, password } = datos;
 
-        const  result = await sql.query`
-                Function_login(${email})        
+        const result = await sql.query`
+                SELECT dbo.Function_login(${email}) AS clave;
             `;
-        const join = (result.recorset[0].clave === password);
-//funcion token para implementar
-        if(join){
-            const tokem = "1234";
+        const clave = result.recordset[0]?.clave;
+        if (!clave) {
+            return new Response(JSON.stringify({
+                estatus: 404,
+                error: `Email no encontrado`
+            }), { status: 404 });
+        }
+
+        const join = (result.recordset[0].clave === password);
+
+        if (join) {
+            const token = "1234";
             return new Response(JSON.stringify({
                 estatus: 200,
-                data: tokem
-            }));
-        }else{
+                data: token
+            }), { status: 200 });
+        } else {
             return new Response(JSON.stringify({
                 estatus: 401,
-                error: `password incorrecto`
-            }));
-        };
+                error: `Password incorrecto`
+            }), { status: 401 });
+        }
 
-    }catch(error){
+    } catch (error) {
         return new Response(JSON.stringify({
-            estatus: 500,
+            status: 500,
             error: `Error en base de datos`
         }));
     }
 }
 
-export {login};
+
+// controller de register
+    async function register(request) {
+    try{
+        const datos = await request.json();
+        const { name, email, password } = datos;
+
+        const result = await sql.query`
+            INSERT INTO usuarios (nombre, correo, contrasena)
+            VALUES (${name}, ${email}, ${password})
+        `;
+
+        if(result){
+            return new Response(JSON.stringify({
+                estatus: 200,
+                message: "usuario creado"
+            }));
+        }else{
+            return new Response(JSON.stringify({
+                estatus: 401,
+                error: `error al guardar`
+            }));
+        };
+    }catch(error){
+        return new Response(JSON.stringify({
+            estatus: 500,
+            error: `Error en base de datos`
+        }));
+    };
+ };
+
+export {login, register};

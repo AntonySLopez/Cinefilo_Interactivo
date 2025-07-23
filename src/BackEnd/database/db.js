@@ -1,17 +1,18 @@
-import sql from "mssql"
+import mssql from "mssql"
+
 
 const config = {
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    server: process.env.DB_SERVER,
-    database: process.env.DB_DATABASE,
+    user: import.meta.env.DB_USER,
+    password: import.meta.env.DB_PASSWORD,
+    server: import.meta.env.DB_SERVER,
+    database: import.meta.env.DB_DATABASE,
     options: {
         encrypt: true,
         trustServerCertificate:true
     }
 };
 
-sql.connect(config)
+mssql.connect(config)
     .then(()=>{
         console.log(`sql conectado`);
     })
@@ -19,4 +20,6 @@ sql.connect(config)
         console.log(`erro de coneccion a sql`, error);
     })
 
-export default {sql};
+const sql = await mssql.connect(config);
+
+export default sql;

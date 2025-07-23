@@ -1,26 +1,9 @@
-const valor = {
-  "email": "test@correo.com",
-  "password": "123456"
-}
 
-   async function loginFetch(data) {
-        try {
-            const peticion = await fetch('http://localhost:4321/api/login', {
-                method: "POST",
-                headers: { 
-                    "Content-Type": "application/json" 
-                },
-                body: JSON.stringify(data)
-                
-            });
+import { register } from "../../BackEnd/controller/user";
 
-            const resultado = await peticion.json();
-            return resultado;
-        } catch (error) {
-            return { estatus: 500, error: error.message }; 
+export const prerender = false;
+
+    export async function POST({request}) {
+        return register(request);
         
-            
-        }
-    };
-
-    loginFetch(valor)
+    }
