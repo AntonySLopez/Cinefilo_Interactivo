@@ -33,7 +33,58 @@
 (10) ⚙️____ FrondEnd(10)--FETCH(9)--API(7)--DB(7) =: Cargar preferencias de USUARIO
 (11) 🧩____ FrondEnd(11)--FETCH(10)-API(8)--DB(8) =: Gestionar preferencias de USUARIO
 ```
+---
 
+## 📁 Estructura de carpetas
+
+```
+📦 CineApp
+
+├── 📁 src
+│   |
+│   ├── 📁 pages
+│   │   ├── 📁 api
+│   │   │   ├── login.js                # login
+│   │   │   ├── register.js             # register
+│   │   │   ├── 📁 favoritos            # favoritos
+│   │   │   │   ├── GET.js 
+│   │   │   │   └── Update.js 
+│   │   │   ├── 📁 listas               # listas personalizadas
+│   │   │   │   ├── GET.js  
+│   │   │   │   └── Update.js 
+│   │   │   └── 📁 preferencias         # tema Preferencias
+│   │   │       ├── GET.js 
+│   │           └── Update.js 
+│   ├── 🧩 frontend
+│   │ 
+│   ├── 📁 backend
+│   │   ├── 📁 controller
+│   │   │   ├── 🔐 auth.js              # rutas de login/registro
+│   │   │   ├── ❤️ favoritos.js         # rutas de favoritos
+│   │   │   ├── 📚 listas.js            # rutas de listas
+│   │   │   └── ⚙️ preferencias.js      # rutas de tema
+│   │   ├── 📁 database
+│   │   │   └── 🔌 db.js                # conexión SQL
+│   │   ├── 📁 middlewares
+│   │   │   └── 🛡️ authMiddleware.js    # JWT validator
+│   │   └── 📁 utils
+│   │       └── 🔧 helpers.js           # funciones auxiliares
+│   │       
+│   ├── 📁 components                   # Astro componentes
+│   ├── 📁 layouts                      # Astro layouts
+│   ├── 📁 styles                       # Astro styles tailwind
+│   └── 📁 features                     # Funcionalidades
+│       ├── 📁 dom                      # manipulacion del DOM
+│       ├── 📁 logic                    # logica pura
+│       ├── 📁 eventos                  # events listeners
+│       ├── 📁 core                     # Coodinacion de DOM y logic
+│       ├── 📁 services                 # API, LocalStorage
+│       └── 📁 utils                    # Funciones auxiliares
+│       
+└── 🔐 .env                              # variables de entorno
+
+```
+## ######################### ----- BACKEND ---- ######################### ##
 ---
 
 ## 🧮 SQL FUNCTION Y SP
@@ -41,12 +92,12 @@
 ```
 📌 DB(1)--FUNCTION_LOGIN
 📌 DB(2)--SP_NEW_USER
-📌 DB(3)--FUNCTION_SHOW_FAVORITE
-📌 DB(4)--SP_USER_ALTER_FAVORITE
-📌 DB(5)--FUNCTION_SHOW_LIST
-📌 DB(6)--SP_USER_ALTER_LIST
+📌 DB(3)--FUNCTION_GET_FAVORITE
+📌 DB(4)--SP_USER_UPDATE_FAVORITE
+📌 DB(5)--FUNCTION_GET_LIST
+📌 DB(6)--SP_USER_UPDATE_LIST
 📌 DB(7)--FUNCTION_USER_PREFERENCES
-📌 DB(8)--SP_USER_ALTER_PREFERENCES
+📌 DB(8)--SP_USER_UPDATE_PREFERENCES
 ```
 
 ---
@@ -72,49 +123,6 @@
 (9) ✏️ API(6)---checkData()---checkToken()---DB(6)---res.
 (10) ⚙️ API(7)---checkToken()---DB(7)---res.
 (11) 🧩 API(8)---checkData()---checkToken()---DB(8)---res.
-```
-
----
-
-## 📁 Estructura de carpetas
-
-```
-📦 CineApp
-
-├── 📁 src
-│   |
-│   ├── 📁 pages
-│   │   ├── 📁 api
-│   │   │   ├── login.js                # login
-│   │   │   ├── register.js             # register
-│   │   │   ├── 📁 favoritos            # favoritos
-│   │   │   │   ├── GET.js 
-│   │   │   │   └── Update.js 
-│   │   │   ├── 📁 listas               # listas personalizadas
-│   │   │   │   ├── GET.js  
-│   │   │   │   └── Update.js 
-│   │   │   └── 📁 preferencias         # tema (claro/oscuro)
-│   │   │       ├── GET.js 
-│   │           └── Update.js 
-│   ├── 🧩 frontend
-│   │ 
-│   ├── 📁 backend
-│   │   ├── 📁 controller
-│   │   │   ├── 🔐 auth.js              # rutas de login/registro
-│   │   │   ├── ❤️ favoritos.js         # rutas de favoritos
-│   │   │   ├── 📚 listas.js            # rutas de listas
-│   │   │   └── ⚙️ preferencias.js      # rutas de tema
-│   │   ├── 📁 database
-│   │   │   └── 🔌 db.js                # conexión SQL
-│   │   ├── 📁 middlewares
-│   │   │   └── 🛡️ authMiddleware.js    # JWT validator
-│   │   └── 📁 utils
-│   │       └── 🔧 helpers.js           # funciones auxiliares
-│   │       
-│   └── 🧩 frontend (carpetas listas para implementar)
-│       
-└── 🔐 .env                              # variables de entorno
-
 ```
 
 ---
@@ -188,10 +196,7 @@
         }
     }
 ```
-
----
-
-## 🧪 DESARROLLO POR SEGMENTOS
+## 🧪 DESARROLLO POR SEGMENTOS DE CONTROLLER / API
 
 ```
 (1) 🔐 Login de usuarios
@@ -246,10 +251,57 @@
         ~ parametros incorectos
         ~ Error interno en la DB(1) 
 ```
+(6)(8)(10) Get de rescursos
 
+    1. Endpoint: POST /api/[recurso]/[accion]
+    2. objetivo: obtener recursos de usuario
+    3.posible entrada:
+        {
+            "email": "ejemplo@correo.com",
+            "token": mfkljhurnbacnyu2k3h48*
+        }
+    4. Flujo interno
+        ~ verificamos token y referencia a usuario
+        ~ Obtenemos datos de DB(3,5,7)
+        ~ Retornamos datos
+    5. respuesta esperada
+        {
+            "message": "datos obtenidos",
+            "data": {...datos}
+        }
+    6. erroes posibles:
+        ~ Error de token o referencia a usuario
+        ~ error interno en sql
+```
+(7)(9)(11) Get de rescursos
+
+    1. Endpoint: POST /api/[recurso]/[accion]
+    2. objetivo: actualizar recursos de usuario
+    3.posible entrada:
+        {
+            "email": "ejemplo@correo.com",
+            "token": mfkljhurnbacnyu2k3h48*
+            "data": [...datosmovie]
+        }
+    4. Flujo interno
+        ~ verificamos token y referencia a usuario
+        ~ obtenemos data y preparamos para enviar
+        ~ enviamos datos de DB(4,6,8)
+        ~ Retornamos datos
+    5. respuesta esperada
+        {
+            "estatus": 200,
+            "message": "datos actualizados"
+        }
+    6. erroes posibles:
+        ~ Error de token o referencia a usuario
+        ~ Error al obtener datos a enviar
+        ~ error interno en sql
+```
+```
 # Astro Starter Kit: Basics
 
-```sh
+```
 pnpm create astro@latest -- --template basics
 ```
 
