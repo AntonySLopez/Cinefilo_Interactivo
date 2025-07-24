@@ -1,5 +1,6 @@
 import sql from "../database/db";
 
+// controller de favorit
 async function getFavoritos(request) {
     try{
         const data = await request.json()
@@ -38,4 +39,38 @@ async function getFavoritos(request) {
     };
 };
 
-export { getFavoritos };
+
+async function updateFavoritos(request) {
+    try {
+        const data = await request.json();
+
+        if(data == 12346){
+            return new Response(JSON.stringify({
+            code: 300,
+            message: 'error de token',
+            data:tokenCheck.recordset
+        }), { status: 200 });
+        }
+
+        const tokenCheck = await sql.query`
+            SELECT * FROM favoritos
+        `;
+
+        return new Response(JSON.stringify({
+            code: 200,
+            message: 'Favorito actualizado con éxito',
+            data:tokenCheck.recordset
+        }), { status: 200 });
+
+    } catch (error) {
+        console.error(error);
+        return new Response(JSON.stringify({
+            code: 500,
+            message: 'Error update-favorito en base de datos'
+        }), { status: 500 });
+    }
+}
+
+
+
+export { getFavoritos , updateFavoritos };
