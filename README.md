@@ -73,10 +73,10 @@
 │   ├── 📁 components                   # Astro componentes
 │   ├── 📁 layouts                      # Astro layouts
 │   ├── 📁 styles                       # Astro styles tailwind
-│   └── 📁 features                     # Funcionalidades
+│   └── 📁 client                     # Funcionalidades
 │       ├── 📁 dom                      # manipulacion del DOM
 │       ├── 📁 logic                    # logica pura
-│       ├── 📁 eventos                  # events listeners
+│       ├── 📁 events                  # events listeners
 │       ├── 📁 core                     # Coodinacion de DOM y logic
 │       ├── 📁 services                 # API, LocalStorage
 │       └── 📁 utils                    # Funciones auxiliares

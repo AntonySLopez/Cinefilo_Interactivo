@@ -14,7 +14,7 @@ async function login(request) {
         if (!clave) {
             return new Response(JSON.stringify({
                 code: 404,
-                message: `Email no encontrado`
+                data: `Email no encontrado`
             }), { status: 404 });
         }
 
