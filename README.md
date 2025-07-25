@@ -273,6 +273,7 @@
         ~ Error de token o referencia a usuario
         ~ error interno en sql
 ```
+
 (7)(9)(11) Get de rescursos
 
     1. Endpoint: POST /api/[recurso]/[accion]
@@ -299,6 +300,12 @@
         ~ error interno en sql
 ```
 ```
+## ######################### ----- FRONDEND ---- ######################### ##
+```
+```
+##
+```
+```
 # Astro Starter Kit: Basics
 
 ```
@@ -314,6 +321,7 @@ pnpm create astro@latest -- --template basics
 ![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
 
 
+```
 ```
 ## 🧞 Commands
 
@@ -331,3 +339,4 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```

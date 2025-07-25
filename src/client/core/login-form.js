@@ -1,5 +1,5 @@
-import { inputCheck } from "../logic/login-form";
-import { loginFecth } from "../services/login-form";
+import { inputCheck } from "../logic/login-inputCheck";
+import { loginFecth } from "../services/login-fetch";
 
 export async function loginController(email, password){
     const esValido = inputCheck(email, password);
