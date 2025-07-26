@@ -1,11 +1,11 @@
-    export function inputCheck(loginEmail, loginPassword) {
-        if (typeof loginEmail !== "string" || typeof loginPassword !== "string") {
+    export function inputCheck(email, password) {
+        if (typeof email !== "string" || typeof password !== "string") {
             console.error("Email o password no son cadenas");
             return false;
         }
 
-        const emailValid = loginEmail.trim().includes("@");
-        const passwordValid = loginPassword.trim().length > 5;
+        const emailValid = email.trim().includes("@");
+        const passwordValid = password.trim().length > 5;
 
         return emailValid && passwordValid;
     }

@@ -1,4 +1,5 @@
-// function de login.astro
-import { actionLoginForm } from "../src/client/dom/login-Action";
+import { initLogin } from "../src/client/events/login-Event";
 
-    actionLoginForm();
+document.addEventListener('DOMContentLoaded', ()=>{
+    initLogin()
+})

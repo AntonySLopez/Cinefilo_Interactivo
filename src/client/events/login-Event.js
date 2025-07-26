@@ -1,10 +1,6 @@
-import { loginController } from "../core/login-form"
+import { login } from '../core/login-controller.js'
+import { form } from '../dom/login-Dom.js';
 
-export function loginEvent(e){
-    e.preventDefault();
-    const form = e.target;
-    const email = form.email.value;
-    const password = form.password.value;
-
-    loginController(email, password);
+export function initLogin(){
+    form.addEventListener("submit", login);
 }

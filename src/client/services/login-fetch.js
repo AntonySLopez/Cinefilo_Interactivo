@@ -12,13 +12,12 @@ export async function loginFecth(email, password){
             },
             body: JSON.stringify(data)
         });
-        console.log(`radar`);
 
         const resultado = await result.json()
         return resultado;
     }catch(error){
         return {
-            estatus:500, error: error.message
+            estatus:500, error: email
         };
     }
 ;}
