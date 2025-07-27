@@ -1,8 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Home from '../components/Home.astro';
+import Menu from '../components/Menu.astro'
 ---
 
 <Layout>
-	<a href="/login">page login</a>
+<a href="/login">page login</a>
+
+	<header class="fixed bottom-0 w-full">
+		<Menu></Menu>
+	</header>
+	<main class="p-[2px] w-full h-full ">
+		<Home></Home>
+	</main>
 </Layout>
+
+<script is:raw type="module" src="../../public/app.js"></script>
 
