@@ -41,6 +41,8 @@ export const box3 = document.getElementById("box3");
 export const box4 = document.getElementById("box4");
 export const box5 = document.getElementById("box5");
 
+export const home = document.getElementById("home")
+//funcion generadora de cartas para todo video
 export function cardGenerador(data){
   const url = `https://image.tmdb.org/t/p/w500`;
   const { poster_path } = data;
@@ -58,3 +60,16 @@ export function cardGenerador(data){
 
   return article;
 }
+
+//funcion para mostrar btn de genero
+
+export function btnGenerador(data){
+  const { id, name } = data;
+
+  let btn = document.createElement("button");
+  btn.textContent = name;
+  btn.setAttribute("idGenero", id)
+  btn.className = ("box2")
+  return btn
+}
+
