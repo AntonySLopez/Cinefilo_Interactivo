@@ -10,6 +10,6 @@ export async function cardRender(contenedor, tipo, page) {
 
     datos.forEach( dato => {
         const card = cardGenerador(dato);
-        contenedor.appendChild(card);
+        contenedor.appendChild(card)
     });
 }

@@ -64,6 +64,8 @@ imagenes
 
     estrenos en cines
 
+    
+
     /movie/now_playing
     https://api.themoviedb.org/3/movie/now_playing?api_key=TU_API_KEY&language=es-ES&page=1
 

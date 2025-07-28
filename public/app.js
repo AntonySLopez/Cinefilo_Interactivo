@@ -1,3 +1,7 @@
 import { loadPopular } from "../src/client/events/home-listenning";
 
-loadPopular()
+
+document.addEventListener('DOMContentLoaded', ()=>{
+    loadPopular()
+
+})

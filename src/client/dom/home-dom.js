@@ -35,7 +35,11 @@ export const datos = {
 
  */
 
-export const contenedor = document.getElementById("populares");
+export const box1 = document.getElementById("box1");
+export const box2 = document.getElementById("box2");
+export const box3 = document.getElementById("box3");
+export const box4 = document.getElementById("box4");
+export const box5 = document.getElementById("box5");
 
 export function cardGenerador(data){
   const url = `https://image.tmdb.org/t/p/w500`;
@@ -44,10 +48,11 @@ export function cardGenerador(data){
   const src = url + poster_path;
 
   let article = document.createElement("article");
-  let img = document.createElement("img");
+  article.className = (" inline-block flex-shrink-0 ")
 
+  let img = document.createElement("img");
+  img.className = ("w-auto h-[100%]")
   img.src = src;
-  img.height = 300;
 
   article.appendChild(img)
 
