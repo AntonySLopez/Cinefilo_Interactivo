@@ -1,3 +1,5 @@
+/**
+ 
 export const popularesContain = document.getElementById("populares");
 
 export function crearCart(){
@@ -6,7 +8,8 @@ export function crearCart(){
     const h3 = document.createElement("h3");
 
     img.src = datos.poster_path;
-    h3.textContent = datos.original_title;
+    img.width = 300
+   // h3.textContent = datos.original_title;
     article.appendChild(img);
     article.appendChild(h3);
 
@@ -22,10 +25,31 @@ export const datos = {
   original_title: 'How to Train Your Dragon',
   overview: 'En la escarpada isla de Mema, donde vikingos y dragones han sido enemigos acérrimos durante generaciones, Hipo se desmarca desafiando siglos de tradición cuando entabla amistad con Desdentao, un temido dragón Furia Nocturna. Su insólito vínculo revela la verdadera naturaleza de los dragones y desafía los cimientos de la sociedad vikinga.',
   popularity: 775.857,
-  poster_path: 'https://image.tmdb.org/t/p/w200/9Zr7ZyiMpgMhhxJQi1tQJp9LGho.jpg',
+  poster_path: 'https://image.tmdb.org/t/p/w500/9Zr7ZyiMpgMhhxJQi1tQJp9LGho.jpg',
   release_date: '2025-06-06',
   title: 'Cómo entrenar a tu dragón',
   video: false,
   vote_average: 8.07,
   vote_count: 1244
+}
+
+ */
+
+export const contenedor = document.getElementById("populares");
+
+export function cardGenerador(data){
+  const url = `https://image.tmdb.org/t/p/w500`;
+  const { poster_path } = data;
+
+  const src = url + poster_path;
+
+  let article = document.createElement("article");
+  let img = document.createElement("img");
+
+  img.src = src;
+  img.height = 300;
+
+  article.appendChild(img)
+
+  return article;
 }

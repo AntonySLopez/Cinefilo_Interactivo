@@ -1,5 +1,3 @@
-import { crearCart } from "../src/client/dom/home-dom";
+import { loadPopular } from "../src/client/events/home-listenning";
 
-document.addEventListener("DOMContentLoaded",()=>{
-    crearCart();
-})
+loadPopular()
