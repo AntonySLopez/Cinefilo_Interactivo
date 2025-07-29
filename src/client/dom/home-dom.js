@@ -40,8 +40,9 @@ export const box2 = document.getElementById("box2");
 export const box3 = document.getElementById("box3");
 export const box4 = document.getElementById("box4");
 export const box5 = document.getElementById("box5");
-
 export const home = document.getElementById("home")
+export const modalInfo = document.getElementById("modal-info")
+
 //funcion generadora de cartas para todo video
 export function cardGenerador(data){
   const url = `https://image.tmdb.org/t/p/w500`;
@@ -50,7 +51,7 @@ export function cardGenerador(data){
   const src = url + poster_path;
 
   let article = document.createElement("article");
-  article.className = (" inline-block flex-shrink-0 ")
+  article.className = ("flex-shrink-0")
 
   let img = document.createElement("img");
   img.className = ("w-auto h-[100%]")
@@ -69,7 +70,7 @@ export function btnGenerador(data){
   let btn = document.createElement("button");
   btn.textContent = name;
   btn.setAttribute("idGenero", id)
-  btn.className = ("box2")
+  btn.className = ("text-black bg-white p-2 rounded-xl w-auto flex items-center whitespace-nowrap")
   return btn
 }
 

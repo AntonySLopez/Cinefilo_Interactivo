@@ -1,7 +1,6 @@
 import { importData } from "../../pages/api/TMDB/fetch";
 import { cardGenerador } from "../dom/home-dom";
 import { btnGenerador } from "../dom/home-dom";
-import { home } from "../dom/home-dom";
 
 //para no mesclar responsabilidades cardRender no me altera
 export async function cardRender(contenedor, tipo, page) {
@@ -31,19 +30,6 @@ export async function btnRender(contenedor, tipo) {
             const btn = btnGenerador(dato);
             contenedor.appendChild(btn);            
         })
-    }
-    console.log(contenedor);
-    
+    }    
 }
 
-//delegacion de eventos para todo home
-
-home.addEventListener('click', (e) => {
-  if (
-    e.target.tagName === 'ARTICLE' ||
-    e.target.tagName === 'BUTTON'
-  ) {
-    modal.classList.toggle("hidden");
-    home.classList.toggle("hidden");
-  }
-});

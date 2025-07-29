@@ -12,14 +12,17 @@ export async function login(e) {
     const check = inputCheck(email,password);
     console.log(email.length);
     
-    
     if(!check){
         return showError(`Ingrese datos correctos`);
     };
     
     try {
         const result = await loginFecth(email,password);
-        console.log(result);
+        console.log(result)
+        if(result.code === 200){
+            console.log(`para implementar: guardar en localStorage`);
+            window.location.href = '/'
+        }
     } catch (error) {
         showError('Error en servidor')
     }

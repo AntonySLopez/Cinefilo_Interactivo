@@ -1,7 +1,10 @@
 ---
+
 import Layout from '../layouts/Layout.astro';
 import Home from '../components/Home.astro';
-import Menu from '../components/Menu.astro'
+import Menu from '../components/navMenu.astro'
+import MovieInfo from '../components/movieInfo.astro';
+
 ---
 
 <Layout>
@@ -13,6 +16,9 @@ import Menu from '../components/Menu.astro'
 	</header>
 	<main class="p-[2px] w-full h-full ">
 		<Home></Home>
+		<div id="movie-info" class="bg-gray-700 hidden w-full h-screen border grid place-items-center">
+			<MovieInfo></MovieInfo>
+		</div>
 	</main>
 </Layout>
 
