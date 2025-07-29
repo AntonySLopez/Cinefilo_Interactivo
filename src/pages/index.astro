@@ -3,20 +3,22 @@
 import Layout from '../layouts/Layout.astro';
 import Home from '../components/Home.astro';
 import Menu from '../components/navMenu.astro'
-import MovieInfo from '../components/movieInfo.astro';
-
+import MovieInfo from '../components/MovieInfo.astro';
 ---
 
 <Layout>
-<a href="/login">page login</a>
+<a href="/login" class="hidden">page login</a>
 
 
-	<header class="fixed bottom-0 w-full">
+	<header class="bg-amber-400 w-full">
 		<Menu></Menu>
 	</header>
-	<main class="p-[2px] w-full h-full ">
-		<Home></Home>
-		<div id="movie-info" class="bg-gray-700 hidden w-full h-screen border grid place-items-center">
+	<main class=" p-[2px] w-full h-full ">
+		<div id="home" class="hidden h-full w-full">
+			<Home></Home>
+		</div>
+		
+		<div id="modal-info" class=" bg-gray-700 w-full h-screen border grid place-items-center">
 			<MovieInfo></MovieInfo>
 		</div>
 	</main>

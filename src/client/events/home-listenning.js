@@ -1,9 +1,7 @@
 import { box1, box2, box3, box4, box5 } from "../dom/home-dom";
 import { cardRender } from "../core/home.core";
 import { btnRender } from "../core/home.core";
-import { home } from "../dom/home-dom";
-import { modalInfo } from "../dom/home-dom";
-
+import { onClickInfo } from "../core/home.core";
 
 export async function loadmovies(){
 
@@ -18,14 +16,5 @@ export async function loadmovies(){
 //delegacion de eventos para todo home para desglozar
 
 export function btnAction(){
-    home.addEventListener('click', (e) => {
-        console.log(`radar 1`);
-        console.log(e.target);
-        
-    if (e.target.tagName === 'IMG' || e.target.tagName === 'BUTTON') {
-
-        home.classList.add("hidden");
-        modalInfo.classList.toggle("hidden");
-    }
-    });
+    home.addEventListener('click', onClickInfo );
 };

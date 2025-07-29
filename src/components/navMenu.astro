@@ -1,30 +1,41 @@
-<nav class="w-full border h-[100px] bg-[#9db6db] flex justify-around items-center">
-    <a href="#home">
-        <div><button></button></div>
-        home
-    </a>
-    <a href="#categorias">
-        <div><button></button></div>
-        categorias
-    </a>
-    <a href="#Buscar">
-        <div><button></button></div>
-        Buscar</a>
-
-    <a href="#listas">
-        <div><button></button></div>
-        listas</a>
-
-    <a href="#Perfil">
-        <div><button></button></div>
-        Perfil</a>
-
+<nav class="fixed bottom-0 z-20 w-full border h-[100px] bg-[#9db6db] flex justify-between items-center
+         sm:absolute sm:flex-col sm:top-[23%] sm:w-[5%] sm:left-[2%] sm:h-[65%] sm:max-h-[630px] py-[1%] ">
+    <section class="w-full h-full flex justify-around items-center
+            sm:flex-col sm:h-auto sm:">
+        <a href="#home">
+            <div><button></button></div>
+            home
+        </a>
+        <a href="#categorias">
+            <div><button></button></div>
+            categorias
+        </a>
+        <a href="#Buscar">
+            <div><button></button></div>
+            Buscar
+        </a>
+        <a href="#listas">
+            <div><button></button></div>
+            listas
+        </a>
+        <a href="#Perfil">
+            <div><button></button></div>
+            Perfil
+        </a>
+    </section>
+    
+    
+    <button class="hidden
+            sm:block">
+        *
+    </button>
 </nav>
 
 <style>
     button{
         width: 30px;
         height: 30px;
+        cursor: pointer;
         border: solid 1px red;
         border-radius: 100%;
     }
@@ -32,6 +43,10 @@
         display: grid;
         align-items: center;
         justify-content: center;
+    }
+    a{
+        margin: 1vh 0 1vh 0;
+
     }
    
 </style>

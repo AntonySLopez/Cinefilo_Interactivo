@@ -42,6 +42,8 @@ export const box4 = document.getElementById("box4");
 export const box5 = document.getElementById("box5");
 export const home = document.getElementById("home")
 export const modalInfo = document.getElementById("modal-info")
+console.log(modalInfo);
+
 
 //funcion generadora de cartas para todo video
 export function cardGenerador(data){

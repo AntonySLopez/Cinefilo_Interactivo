@@ -1,6 +1,9 @@
 import { importData } from "../../pages/api/TMDB/fetch";
 import { cardGenerador } from "../dom/home-dom";
 import { btnGenerador } from "../dom/home-dom";
+import { home } from "../dom/home-dom";
+import { modalInfo } from "../dom/home-dom";
+
 
 //para no mesclar responsabilidades cardRender no me altera
 export async function cardRender(contenedor, tipo, page) {
@@ -31,5 +34,18 @@ export async function btnRender(contenedor, tipo) {
             contenedor.appendChild(btn);            
         })
     }    
+}
+
+// delegacion de eventos
+export function onClickInfo(e){
+        console.log(e.target);
+        
+    if (e.target.tagName === 'IMG' || e.target.tagName === 'BUTTON') {
+
+        home.classList.add("hidden");
+        modalInfo.classList.remove("hidden");
+        console.log(modalInfo);
+        
+    }
 }
 

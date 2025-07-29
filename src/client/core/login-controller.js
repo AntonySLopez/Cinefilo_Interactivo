@@ -1,6 +1,7 @@
 import { inputCheck } from "../logic/login-inputCheck";
 import { loginFecth } from "../services/login-fetch";
 import { showError } from "../dom/login-Dom";
+// importar saveToken() para guardar token de localStorage
 
 export async function login(e) {
 

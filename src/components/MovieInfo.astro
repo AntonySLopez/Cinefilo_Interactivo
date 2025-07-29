@@ -1,40 +1,49 @@
-    <section id="modal-info" class="sm:bg-gray-400 sm:w-full sm:h-screen sm:relative">
-        <div id="pick" class="sm:w-full sm:h-full">
-        <img id="poster" src="#" alt="poster" class="sm:w-full sm:h-full"/>
+    <section  class="w-full h-full bg-gray-400
+            sm:h-screen sm:relative">
+<!-- // img de portada  -->
+        <div id="pick" class="w-full border h-[60%]
+            sm:h-full">
+            <img id="poster" src="#" alt="poster" class="w-full h-full"/>
         </div>
-        
-        <div class="sm:w-full sm:border sm:h-[10%] sm:absolute sm:top-0 sm:grid sm:place-items-center">
-        <h2 id="title" class="sm:border sm:rounded-[0px_0px_10px_10px] sm:w-[40%] sm:h-full sm:grid sm:place-items-center">titulo de pelicula</h2>
+<!-- //titulo  -->
+        <div class="sm:w-full sm:border sm:h-[8%] sm:absolute sm:top-0 sm:grid sm:place-items-center">
+            <h2 id="title" class="border text-[2rem]
+            sm:rounded-[0px_0px_10px_10px] sm:w-[40%] sm:h-full sm:grid sm:place-items-center">titulo de pelicula</h2>
         </div>
+<!-- //parrafo -->
+        <div class="h-[30%] overflow-auto
+        sm:absolute sm:w-[25%] sm:h-[25%] border sm:rounded-[30px] sm:top-[65%] sm:right-[1%] sm:flex sm:flex-col sm:justify-between">
 
-        <div id="movie-info" class="sm:absolute sm:w-[32%] sm:h-[45%] sm:border sm:rounded-[30px] sm:top-[52%] sm:right-[2%]">
-        <p class="sm:w-full sm:h-[65%] sm:border sm:rounded-[30px] sm:flex sm:p-2">parrafo</p>
-        <div class="sm:w-full sm:h-[35%] sm:flex sm:justify-between sm:items-center">
-            <span class="sm:m-[3%] sm:rounded-[100%] sm:bg-red-500 sm:w-[20%] sm:text-center">4</span>
-            <div class="sm:mx-4 sm:flex sm:border sm:w-[50%] sm:gap-1">
-            <button class="button sm:border sm:w-[50%] sm:rounded-[100%]">♡</button>
-            <button class="button sm:border sm:w-[50%] sm:rounded-[100%]" type="submit">◇</button>
+            <p class="sm:w-full p-[2%] 
+            sm:max-h-[77%] sm:border sm:rounded-[30px] sm:flex sm:p-[4%] sm:overflow-auto">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis odit, excepturi minima, ipsa cum voluptatum officia neque sed magnam sint molestias quas quidem, impedit autem quibusdam! Unde neque Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat pariatur excepturi error cumque obcaecati laudantium itaque temporibus dolores atque placeat! Vitae voluptas sit iure nam, minima saepe qui ipsum officiis.Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis odit, excepturi minima, ipsa cum voluptatum officia neque sed magnam sint molestias quas quidem, impedit autem quibusdam! Unde neque Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat pariatur excepturi error cumque obcaecati laudantium itaque temporibus dolores atque placeat! Vitae voluptas sit iure nam, minima saepe qui ipsum officiis.
+            </p>
+
+<!-- // Estados-->
+            <div class="absolute h-[60%] top-[5%] right-[3%] flex w-[15%] border justify-between flex-col-reverse items-center 
+            sm:w-full sm:h-[23%] sm:flex-row sm:static">
+
+                <span id="info-stars" class="rounded-[100%] bg-yellow-300 w-[55px] h-[55px] grid place-items-center text-3xl
+                sm:w-[4vh] sm:h-[4vh] sm:text-center sm:m-[3%] ">
+                    4
+                </span>
+
+                <div class="flex items-center flex-col border w-full gap-4
+                sm:mx-4 sm:w-[30%] sm:flex-row ">
+                    <button id="action-Favorito" class="border w-[55px] h-[55px] rounded-[100%] text-5xl
+                    sm:w-[4vh] sm:h-[4vh]">
+                        ♡
+                    </button>
+                    <button id="action-list" class="border w-[55px] h-[55px] rounded-[100%] text-5xl
+                    sm:w-[4vh] sm:h-[4vh]">
+                        ◇
+                    </button>
+                </div>
             </div>
         </div>
-        </div>
-        
-        <div id="movie-info" class="sm:absolute sm:w-[31%] sm:p-2 sm:h-[35%] sm:border sm:top-[65%] sm:left-[10%] sm:rounded-[30px_30px_00px_0px]">
+<!--//contenido adicional  -->
+        <div class=" min-h-[20%] p-2 h-[25%] bg-amber-400
+        sm:absolute sm:w-[25%] sm:h-[25%] border sm:top-[75%] sm:left-[8%] sm:rounded-[30px_30px_00px_0px]">
         about
         </div>
-        
-        <nav id="nav" class="sm:absolute sm:w-[5%] sm:max-h-[630px] sm:h-[65%] sm:border sm:top-[23%] sm:left-[2%] sm:flex sm:flex-col sm:justify-between">
-        <div class="sm:bg-white sm:border sm:rounded-full sm:flex sm:flex-col sm:items-center sm:h-[60%]">
-            <button>♤</button>
-            <button class="button">♡</button>
-            <button class="button">◇</button>
-            <button class="button">♧</button>
-            <button class="button">⊙</button>
-        </div>
-        <div>
-            <button class="sm:flex sm:flex-col sm:border sm:my-[100%] sm:rounded-full">
-            ⊙
-            ○
-            </button>
-        </div>
-        </nav>
     </section>
