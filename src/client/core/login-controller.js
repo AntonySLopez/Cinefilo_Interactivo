@@ -1,4 +1,4 @@
-import { inputCheck } from "../logic/login-inputCheck";
+import { loginInputCheck } from "../logic/login-inputCheck";
 import { loginFecth } from "../services/login-fetch";
 import { showError } from "../dom/login-Dom";
 // importar saveToken() para guardar token de localStorage
@@ -10,7 +10,7 @@ export async function login(e) {
 
     const email = form.email.value.trim();
     const password = form.password.value.trim();
-    const check = inputCheck(email,password);
+    const check = loginInputCheck(email,password);
     console.log(email.length);
     
     if(!check){

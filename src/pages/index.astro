@@ -4,13 +4,14 @@ import Layout from '../layouts/Layout.astro';
 import Home from '../components/Home.astro';
 import Menu from '../components/navMenu.astro'
 import MovieInfo from '../components/MovieInfo.astro';
+import Busqueda from '../components/Busqueda.astro';
 ---
 
 <Layout>
 <a href="/login" class="hidden">page login</a>
 
 
-	<header class="bg-amber-400 w-full">
+	<header id="nav-menu" class="bg-amber-400 w-full">
 		<Menu></Menu>
 	</header>
 	<main class=" p-[2px] w-full h-full ">
@@ -18,8 +19,11 @@ import MovieInfo from '../components/MovieInfo.astro';
 			<Home></Home>
 		</div>
 		
-		<div id="modal-info" class=" bg-gray-700 w-full h-screen border grid place-items-center">
+		<div id="modal-info" class=" bg-gray-700 w-full h-full hidden border grid place-items-center">
 			<MovieInfo></MovieInfo>
+		</div>
+		<div id="buscador" class="bg-gray-400 w-full h-full">
+			<Busqueda></Busqueda>
 		</div>
 	</main>
 </Layout>

@@ -2,26 +2,22 @@
          sm:absolute sm:flex-col sm:top-[23%] sm:w-[5%] sm:left-[2%] sm:h-[65%] sm:max-h-[630px] py-[1%] ">
     <section class="w-full h-full flex justify-around items-center
             sm:flex-col sm:h-auto sm:">
-        <a href="#home">
-            <div><button></button></div>
-            home
-        </a>
-        <a href="#categorias">
-            <div><button></button></div>
-            categorias
-        </a>
-        <a href="#Buscar">
-            <div><button></button></div>
-            Buscar
-        </a>
-        <a href="#listas">
-            <div><button></button></div>
-            listas
-        </a>
-        <a href="#Perfil">
-            <div><button></button></div>
-            Perfil
-        </a>
+            
+        <div data-href="home">
+            <button></button>
+        </div>
+        <div data-href="categorias">
+            <button></button>
+        </div>
+        <div data-href="Buscador">
+            <button></button>
+        </div>
+        <div data-href="listas">
+            <button></button>
+        </div>
+        <div data-href="Perfil">
+            <button></button>
+        </div>
     </section>
     
     
@@ -33,6 +29,7 @@
 
 <style>
     button{
+        margin: 1vh 0 1vh 0;
         width: 30px;
         height: 30px;
         cursor: pointer;
@@ -43,10 +40,6 @@
         display: grid;
         align-items: center;
         justify-content: center;
-    }
-    a{
-        margin: 1vh 0 1vh 0;
-
     }
    
 </style>

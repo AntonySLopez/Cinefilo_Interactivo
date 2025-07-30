@@ -1,12 +1,20 @@
 import { importData } from "../../pages/api/TMDB/fetch";
 import { cardGenerador } from "../dom/home-dom";
 import { btnGenerador } from "../dom/home-dom";
-import { home } from "../dom/home-dom";
+// controlador de modal
 import { modalInfo } from "../dom/home-dom";
+import { modalToggle } from "../dom/home-dom";
+import { home } from "../dom/home-dom";
+
+import { modalController } from "../logic/home-logic";
+import { elementoDom } from "../dom/home-dom";
+
+import { importBusqueda } from "../../pages/api/TMDB/fetch";
+import { buscadorInputCheck } from "../logic/home-logic";
 
 
 //para no mesclar responsabilidades cardRender no me altera
-export async function cardRender(contenedor, tipo, page) {
+export async function homeRender(contenedor, tipo, page) {
     const datos = await importData(tipo, page);
 
     if(datos.status === 500 || datos.message){
@@ -36,16 +44,50 @@ export async function btnRender(contenedor, tipo) {
     }    
 }
 
-// delegacion de eventos
+// delegacion de evento para informacionde videos
 export function onClickInfo(e){
-        console.log(e.target);
         
     if (e.target.tagName === 'IMG' || e.target.tagName === 'BUTTON') {
 
-        home.classList.add("hidden");
-        modalInfo.classList.remove("hidden");
-        console.log(modalInfo);
-        
+            modalToggle(modalInfo, home);
+            modalController.modalActivo = modalInfo;
+                      
     }
 }
+// delegacion de evantos para navegacion en nav
+export function navModal(e){
 
+    const btnActivo = e.target.parentElement.dataset;
+    console.log(btnActivo);
+    if (modalController.modalActivo == btnActivo.href) {
+        console.log(`error`);
+        return;
+    }else{
+        modalToggle(modalController.modalActivo, elementoDom[btnActivo.href])
+        modalController.modalActivo = elementoDom[btnActivo.href]
+    }
+    
+}
+// buscador
+export async function buscadorRender(contenedor, page){
+    // tipo se implementara en busqueda vanzada
+    const valor = contenedor.querySelector("#input-buscador").value;
+    const box = contenedor.querySelector("#box-buscador")
+
+    console.log(valor);
+    
+    if(buscadorInputCheck(valor)){
+        return contenedor.textContent = "Ingrese nombre";
+    }
+
+    const datos = await importBusqueda(valor, page);
+
+    if(datos.status === 500 || datos.message){
+        return contenedor.textContent = datos.message || `Error al obtener datos`;
+    };
+    
+    datos.results.forEach(dato =>{
+        const card = cardGenerador(dato);
+        box.appendChild(card)
+    })
+}
