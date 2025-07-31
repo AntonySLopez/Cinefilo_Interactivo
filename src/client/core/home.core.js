@@ -1,30 +1,30 @@
 import { importData } from "../../pages/api/TMDB/fetch";
-import { cardGenerador } from "../dom/home-dom";
+import { cardRender } from "../dom/home-dom";
 import { btnGenerador } from "../dom/home-dom";
 // controlador de modal
 import { modalInfo } from "../dom/home-dom";
 import { modalToggle } from "../dom/home-dom";
 import { home } from "../dom/home-dom";
-
-import { modalController } from "../logic/home-logic";
+import { dbMovieTemporal } from "../utils/dbTemporal";
+import { modalController} from "../logic/home-logic";
 import { elementoDom } from "../dom/home-dom";
 
 import { importBusqueda } from "../../pages/api/TMDB/fetch";
 import { buscadorInputCheck } from "../logic/home-logic";
 
+import { saveIdMovies } from "../logic/home-logic";
+import { loadInfo } from "../dom/home-dom";
 
 //para no mesclar responsabilidades cardRender no me altera
 export async function homeRender(contenedor, tipo, page) {
     const datos = await importData(tipo, page);
+    saveIdMovies(datos.results, dbMovieTemporal)
 
     if(datos.status === 500 || datos.message){
         return contenedor.textContent = datos.message || `Error al obtener datos`;
     };
 
-    datos.results.forEach( dato => {
-        const card = cardGenerador(dato);
-        contenedor.appendChild(card)
-    });
+    cardRender(contenedor, datos);
 }
 
 // reder de btn de generos u otros menores que no sean cartas
@@ -47,11 +47,12 @@ export async function btnRender(contenedor, tipo) {
 // delegacion de evento para informacionde videos
 export function onClickInfo(e){
         
-    if (e.target.tagName === 'IMG' || e.target.tagName === 'BUTTON') {
+    if (e.target.tagName === 'IMG') {
 
             modalToggle(modalInfo, home);
             modalController.modalActivo = modalInfo;
-                      
+        // funcionde cargar datos de movieINfo
+        loadInfo(e.target.dataset.id, dbMovieTemporal);     
     }
 }
 // delegacion de evantos para navegacion en nav
@@ -86,8 +87,6 @@ export async function buscadorRender(contenedor, page){
         return contenedor.textContent = datos.message || `Error al obtener datos`;
     };
     
-    datos.results.forEach(dato =>{
-        const card = cardGenerador(dato);
-        box.appendChild(card)
-    })
+    cardRender(box, datos);
+
 }

@@ -1,3 +1,5 @@
+import mod from "astro/zod";
+import MovieInfo from "../../components/MovieInfo.astro";
 
 //elemtos de home boxs
   export const box1 = document.getElementById("box1");
@@ -34,10 +36,19 @@ export function cardGenerador(data){
     let img = document.createElement("img");
     img.className = ("w-auto h-[100%]")
     img.src = src;
+    img.dataset.id = data.id
 
     article.appendChild(img)
 
     return article;
+  }
+
+  export function cardRender(contenedor, datos) {
+    datos.results.forEach( dato => {
+        const card = cardGenerador(dato);
+        contenedor.appendChild(card)
+    });
+
   }
 
 //funcion para mostrar btn de genero
@@ -64,4 +75,28 @@ export function cardGenerador(data){
 export const elementoDom = {
   "home": home,
   "buscador": buscador
+}
+
+//funcion para mostrar contenido en movieInfo
+
+export function loadInfo(id, db) {
+
+  const url = `https://image.tmdb.org/t/p/w780`
+
+  const poster = modalInfo.querySelector("#poster");
+  const titulo = modalInfo.querySelector("#title");
+  const contexto = modalInfo.querySelector("#contexto");
+  const infoStars = modalInfo.querySelector("#info-stars");
+  const favoritos = modalInfo.querySelector("#action-favorito");
+  const lista = modalInfo.querySelector("#action-list");
+  const reparto = modalInfo.querySelector("#reparto");
+
+  const info = db[id];
+  const { backdrop_path, title, vote_average, overview } = info;
+
+  titulo.textContent = title;
+  contexto.textContent = overview;
+  infoStars.textContent = vote_average;
+  poster.href = url + backdrop_path;
+
 }
