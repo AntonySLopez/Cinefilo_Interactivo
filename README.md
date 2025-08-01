@@ -129,34 +129,34 @@
 
 ## 🗄️ Diseño SQL (estructura de tablas)
 
-📊 **Tabla: usuarios**
-\- `id_usuario` (PK, int, AI)
-\- `nombre` (varchar)
-\- `correo` (varchar, UNIQUE)
-\- `contrasena` (varchar)
-\- `fecha_creacion` (timestamp)
+📊 **tabla: Users**
+    \-  `user_id` int primary key identity,
+    \-	`name` varchar(100) not null,
+    \-	`email` varchar(100) unique not null,
+    \-	`password` varchar(250) not null
 
-📊 **Tabla: favoritos**
-\- `id_favorito` (PK, int, AI)
-\- `id_usuario` (FK)
-\- `id_pelicula` (text)   <!-- ID externo de API TMDB-->
+📊 **tabla: Movies**
+    \-	`movie_id` int primary key not null,
+    \-	`movie_name` varchar(100) not null,
+    \-	`poster` varchar(250) not null
 
-📊 **Tabla: listas**
-\- `id_lista` (PK, int, AI)
-\- `id_usuario` (FK)
-\- `nombre_lista` (varchar)
-\- `descripcion` (text)
-\- `fecha_creacion` (timestamp)
+📊 **tabla: Lists**
+    \-	`list_id` int primary key identity,
+    \-	`user_id` int foreign key references Users(user_id),
+    \-	`name` varchar(100) not null
 
-📊 **Tabla: peliculas** (relacional)
-\- `id` (PK, int, AI)
-\- `id_lista` (FK)
-\- `id_pelicula` (varchar)
+📊 **tabla: List_items**
+    \-	`items_id` int primary key identity,    
+    \-	`list_id` int foreign key references Lists(list_id),
+    \-	`movie_id` int foreign key references Movies(movie_id)
+    \-	constraint `list_movie` unique (list_id, movie_id)
+
+*Pordefinir*
 
 📊 **Tabla: preferencias**
-\- `id_preferencia` (PK, int, AI)
-\- `id_usuario` (FK)
-\- `tema` (varchar) — valores posibles: `'oscuro'`, `'claro'`
+    \- `id_preferencia` (PK, int, AI)
+    \- `id_usuario` (FK)
+    \- `tema` (varchar) — valores posibles: `'oscuro'`, `'claro'`
 
 ---
 

@@ -52,7 +52,8 @@ export function onClickInfo(e){
             modalToggle(modalInfo, home);
             modalController.modalActivo = modalInfo;
         // funcionde cargar datos de movieINfo
-        loadInfo(e.target.dataset.id, dbMovieTemporal);     
+        const id = e.target.dataset.id;
+        loadInfo(id, dbMovieTemporal);     
     }
 }
 // delegacion de evantos para navegacion en nav

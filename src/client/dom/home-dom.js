@@ -80,6 +80,7 @@ export const elementoDom = {
 //funcion para mostrar contenido en movieInfo
 
 export function loadInfo(id, db) {
+  
 
   const url = `https://image.tmdb.org/t/p/w780`
 
@@ -91,12 +92,14 @@ export function loadInfo(id, db) {
   const lista = modalInfo.querySelector("#action-list");
   const reparto = modalInfo.querySelector("#reparto");
 
-  const info = db[id];
-  const { backdrop_path, title, vote_average, overview } = info;
+  const data = db[id];
+  console.log(data);
+
+  const { backdrop_path, title, vote_average, overview } = data;
 
   titulo.textContent = title;
   contexto.textContent = overview;
   infoStars.textContent = vote_average;
-  poster.href = url + backdrop_path;
+  poster.src = url + backdrop_path;
 
 }

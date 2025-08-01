@@ -8,7 +8,9 @@ async function login(request) {
         const { email, password } = datos;
 
         const result = await sql.query`
-                SELECT dbo.Function_login(${email}) AS clave;
+                select password AS clave
+                from Users
+                where email = ${email}
             `;
         const clave = result.recordset[0]?.clave;
         if (!clave) {
@@ -49,7 +51,7 @@ async function login(request) {
         const { name, email, password } = datos;
 
         const result = await sql.query`
-            INSERT INTO usuarios (nombre, correo, contrasena)
+            INSERT INTO Users (name, email, password)
             VALUES (${name}, ${email}, ${password})
         `;
 
