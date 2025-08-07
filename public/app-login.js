@@ -1,4 +1,4 @@
-import { initLogin } from "../src/client/events/login-Event";
+import { initLogin } from "../src/client/events/user-Event";
 
 document.addEventListener('DOMContentLoaded', ()=>{
     initLogin()

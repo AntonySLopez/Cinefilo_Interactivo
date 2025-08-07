@@ -26,7 +26,7 @@ async function login(request) {
             const token = "1234";
             return new Response(JSON.stringify({
                 code: 200,
-                data: token
+                token: token
             }), { status: 200 });
         } else {
             return new Response(JSON.stringify({

@@ -21,7 +21,7 @@ export async function loginFecth(email, password){
     }
 ;}
 
-export async function registerFetch(name, email, password) {
+export async function registerFetch(email, password, name) {
     
     const data = {
         name:name,
