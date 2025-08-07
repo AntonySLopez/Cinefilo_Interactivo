@@ -51,13 +51,22 @@ async function login(request) {
         const { name, email, password } = datos;
 
         const result = await sql.query`
-            INSERT INTO Users (name, email, password)
-            VALUES (${name}, ${email}, ${password})
+            BEGIN TRANSACTION;
+
+                INSERT INTO Users (name, email, password)
+                VALUES (${name}, ${email}, ${password});
+
+                DECLARE @newUserId INT = SCOPE_IDENTITY();
+
+                INSERT INTO favoritos (user_id)
+                VALUES (@newUserId);
+
+            COMMIT TRANSACTION;
         `;
 
         if(result){
             return new Response(JSON.stringify({
-                code: 200,
+                code: 201,
                 message: "Usuario creado"
             }),{ status:200 });
         }else{

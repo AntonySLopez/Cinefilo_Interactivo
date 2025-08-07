@@ -1,12 +1,12 @@
-import { loadmovies } from "../src/client/events/home-listenning";
-import { btnAction } from "../src/client/events/home-listenning";
-import { navAction } from "../src/client/events/home-listenning";
-import { buscadorAction } from "../src/client/events/home-listenning";
 
+import { startHome } from "../src/client/events/startHome";
+import { infoMovie } from "../src/client/events/detalleDePelicula";
+import { navController } from "../src/client/events/navController";
+import { buscarPelicula } from "../src/client/events/buscarPelicula";
 
 document.addEventListener('DOMContentLoaded', ()=>{
-    loadmovies()
-    btnAction();
-    navAction()
-    buscadorAction()
+    startHome()
+    infoMovie();
+    navController()
+    buscarPelicula()
 })

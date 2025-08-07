@@ -17,7 +17,32 @@ export async function loginFecth(email, password){
         return resultado;
     }catch(error){
         return {
-            estatus:500, error: email
         };
     }
 ;}
+
+export async function registerFetch(name, email, password) {
+    
+    const data = {
+        name:name,
+        email:email,
+        password:password
+    }
+    try {
+        
+        const result = await fetch( '/api/register', {
+            method: "POST",
+            headers:{
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+        const resultado = await result;
+        return resultado;
+    } catch (error) {
+        return {
+            estatus:500, message: message.error
+        }
+    }
+}

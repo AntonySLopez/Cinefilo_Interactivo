@@ -1,16 +1,3 @@
-export let modalController = {
-    modalActivo: "home"
-}
-
-export function buscadorInputCheck(input){
-    if(!input){
-        return false;
-    }
-    return true;
-}
-
-let db = {};
-
 //funcino para ordenar peliculas por id:
 export  function saveIdMovies(data, db) {
     for (const movie of data) {

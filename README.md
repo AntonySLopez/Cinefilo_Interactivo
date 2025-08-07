@@ -129,27 +129,56 @@
 
 ## 🗄️ Diseño SQL (estructura de tablas)
 
-📊 **tabla: Users**
-    \-  `user_id` int primary key identity,
-    \-	`name` varchar(100) not null,
-    \-	`email` varchar(100) unique not null,
-    \-	`password` varchar(250) not null
+**Tabla: Users**
+CREATE TABLE Users (
+    user_id INT PRIMARY KEY IDENTITY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(250) NOT NULL
+);
 
-📊 **tabla: Movies**
-    \-	`movie_id` int primary key not null,
-    \-	`movie_name` varchar(100) not null,
-    \-	`poster` varchar(250) not null
+**Tabla: Movies**
+CREATE TABLE Movies (
+    movie_id INT PRIMARY KEY,
+    movie_name VARCHAR(100) NOT NULL,
+    poster VARCHAR(250) NOT NULL,
+	baner VARCHAR(250) NOT NULL
+);
 
-📊 **tabla: Lists**
-    \-	`list_id` int primary key identity,
-    \-	`user_id` int foreign key references Users(user_id),
-    \-	`name` varchar(100) not null
+**Tabla: favoritos (1 por usuario)**
+CREATE TABLE favoritos (
+    favoritos_id INT PRIMARY KEY IDENTITY,
+    user_id INT UNIQUE, -- cada usuario tiene 1 favorito
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
 
-📊 **tabla: List_items**
-    \-	`items_id` int primary key identity,    
-    \-	`list_id` int foreign key references Lists(list_id),
-    \-	`movie_id` int foreign key references Movies(movie_id)
-    \-	constraint `list_movie` unique (list_id, movie_id)
+**Tabla: favoritos_items (varias películas por favorito)**
+CREATE TABLE favoritos_items (
+    items_id INT PRIMARY KEY IDENTITY,
+    favoritos_id INT,
+    movie_id INT,
+    FOREIGN KEY (favoritos_id) REFERENCES favoritos(favoritos_id),
+    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id)
+    -- NO USAMOS UNIQUE en movie_id aquí
+);
+
+**Tabla: Lists**
+CREATE TABLE Lists (
+    list_id INT PRIMARY KEY IDENTITY,
+    user_id INT,
+    name VARCHAR(100) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
+
+**Tabla: List_items**
+CREATE TABLE List_items (
+    items_id INT PRIMARY KEY IDENTITY,
+    list_id INT,
+    movie_id INT,
+    FOREIGN KEY (list_id) REFERENCES Lists(list_id),
+    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id),
+    CONSTRAINT list_movie UNIQUE (list_id, movie_id) -- evita repetir una peli en la misma lista
+);
 
 *Pordefinir*
 
