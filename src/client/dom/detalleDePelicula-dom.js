@@ -2,7 +2,6 @@
 
     export function loadInfo(id, db) {
       
-    
         const url = `https://image.tmdb.org/t/p/w780`
         
         const poster = modalInfo.querySelector("#poster");
@@ -17,10 +16,15 @@
         console.log(data);
         
         const { backdrop_path, title, vote_average, overview } = data;
+
+        favoritos.setAttribute('data-id', id)
+        favoritos.setAttribute('data-favorito', 'true')
+        console.log(favoritos);
         
         titulo.textContent = title;
         contexto.textContent = overview;
         infoStars.textContent = vote_average;
         poster.src = url + backdrop_path;
+        
     
     }

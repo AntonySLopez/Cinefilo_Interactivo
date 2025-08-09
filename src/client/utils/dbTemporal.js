@@ -21,4 +21,12 @@ video: false
 vote_average: 8.079
 vote_count: 1361
 
+            "poster_path": movie.poster_path,       //poster
+            "backdrop_path": movie.backdrop_path,   //baner
+            "title": movie.title,                   //titulo
+            "video": movie.video,                   //videio
+            "vote_average:": movie.vote_average,    //estrellas
+            "vote_count": movie.vote_count,         //cantidad de votos totales
+            "overview": movie.overview              //descripcion
+
 */

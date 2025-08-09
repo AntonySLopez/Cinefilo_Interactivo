@@ -1,9 +1,9 @@
-import { modalInfo } from "../dom/detalleDePelicula";
+import { modalInfo } from "../dom/detalleDePelicula-dom";
 import { modalController } from "../utils/modalController";
 import { dbMovieTemporal } from "../utils/dbTemporal";
 import { home } from "../dom/startHome";
 import { modalToggle } from "../utils/modalToggle";
-import { loadInfo } from "../dom/detalleDePelicula";
+import { loadInfo } from "../dom/detalleDePelicula-dom";
 
 export function onClickInfo(e){
         

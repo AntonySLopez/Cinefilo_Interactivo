@@ -17,7 +17,7 @@ export async function dataRender(contenedor, tipo, page) {
     cardRender(contenedor, datos);
 }
 
-console.log(modalController.modalActivo);
+console.log(`modal controlador`,modalController.modalActivo);
 
 
 // reder de btn de generos u otros menores que no sean cartas

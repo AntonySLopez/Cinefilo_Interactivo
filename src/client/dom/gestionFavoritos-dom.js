@@ -1,0 +1,1 @@
+export const favoritos = document.getElementById("action-favorito");

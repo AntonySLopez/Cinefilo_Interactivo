@@ -17,6 +17,7 @@ export async function loginFecth(email, password){
         return resultado;
     }catch(error){
         return {
+            estatus:500, message: message.error
         };
     }
 ;}
