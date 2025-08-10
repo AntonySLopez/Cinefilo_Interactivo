@@ -3,7 +3,7 @@ export async function updateFavoritos(data, action) {
         const urlAdd = "api/favoritos/add";
         const urlDelete = "api/favoritos/delete";
 
-        const url = action? urlAdd : urlDelete;
+        const url = !action? urlAdd : urlDelete;
 
         const res = await fetch(url, {
             method: "POST",

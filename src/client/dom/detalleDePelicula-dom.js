@@ -18,7 +18,7 @@
         const { backdrop_path, title, vote_average, overview } = data;
 
         favoritos.setAttribute('data-id', id)
-        favoritos.setAttribute('data-favorito', 'true')
+        favoritos.setAttribute('data-favorito', 'false')
         console.log(favoritos);
         
         titulo.textContent = title;

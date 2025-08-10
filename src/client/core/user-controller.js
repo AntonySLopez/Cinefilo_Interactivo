@@ -26,12 +26,17 @@ export async function login(e) {
             console.log(`para implementar: guardar en localStorage`);
             window.location.href = '/'
         }
-        if(result.code === 201){
-            showError('usuario creado');
-            email.value = '';
-            email.password = '';
-            email.name = '';
-            
+        if(result.code === 401){
+            showError(result.message);
+            form.email.value = '';
+            form.password.value = '';
+            form.name.value = '';
+        }
+        if(result.code ===404){
+            showError(result.message);
+            form.email.value = '';
+            form.password.value = '';
+            form.name.value = '';
         }
     } catch (error) {
         showError('Error en servidor')
@@ -58,16 +63,13 @@ export async function register(e) {
         const result = await registerFetch(email, password, name);
         console.log(result)
         
-        if(result.code === 200){
-            console.log(`para implementar: guardar en localStorage`);
-            window.location.href = '/'
-        }
-        if(result.code === 201){
+        if(result.status === 200){
             showError('usuario creado');
-            email.value = '';
-            email.password = '';
-            email.name = '';
-        
+            console.log(`para implementar: guardar en localStorage`);
+            form.email.value = '';
+            form.password.value = '';
+            form.name.value = '';
+            window.location.href = '/'
         }
     } catch (error) {
         showError('Error en servidor')

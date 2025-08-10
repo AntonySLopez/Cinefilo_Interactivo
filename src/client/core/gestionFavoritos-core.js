@@ -2,16 +2,18 @@
     import { dbMovieTemporal } from "../utils/dbTemporal";
     import { updateFavoritos } from "../services/updateFavoritos-fetch";
 
-export async function actionFavoritos(estado) {
+export async function actionFavoritos() {
 
     //id de usuario
 
     const id = favoritos.dataset.id;
-    console.log(`db-id`,dbMovieTemporal[id]);
+    const estado = (favoritos.dataset.favorito == 'true')? true : false;
+
+    console.log(`db-id`,dbMovieTemporal[id] , `estado: `,estado);
 
     const { title, poster_path, backdrop_path } = dbMovieTemporal[id]
 
-    console.log(id);
+    console.log(estado);
 
     const data = {
         "userId"    : 1,
