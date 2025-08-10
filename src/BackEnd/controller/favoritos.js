@@ -42,65 +42,81 @@ async function getFavoritos(request) {
 async function addFavoritos(request) {
     try {
         const data = await request.json();
+        const { userId, movieID, titulo, poster, baner } = data;
 
-        const { userID, movieID, titulo, poster, baner } = data;
 
+        // Ejecutamos la query que hace ambas cosas
         const result = await sql.query`
-        BEGIN TRANSACTION;
-
-            DECLARE @favoritos_id INT;
-
-            -- 1️⃣ Obtener el favoritos_id del usuario
-            SELECT @favoritos_id = favoritos_id
-            FROM favoritos
-            WHERE user_id = ${userID};
-
-            -- 2️⃣ Si no existe, crearlo
-            IF @favoritos_id IS NULL
-            BEGIN
-                INSERT INTO favoritos (user_id)
-                VALUES (${userID});
-
-                SET @favoritos_id = SCOPE_IDENTITY();
-            END
-
-            -- 3️⃣ Verificar si la película existe en Movies
-            IF NOT EXISTS (
-                SELECT 1 FROM Movies WHERE movie_id = ${movieID}
-            )
+            -- Insertar movie si no existe
+            IF NOT EXISTS (SELECT 1 FROM Movies WHERE movie_id = ${movieID})
             BEGIN
                 INSERT INTO Movies (movie_id, movie_name, poster, baner)
                 VALUES (${movieID}, ${titulo}, ${poster}, ${baner});
-            END
+            END;
 
-            -- 4️⃣ Verificar si ya está en favoritos_items
-            IF NOT EXISTS (
-                SELECT 1 FROM favoritos_items
-                WHERE favoritos_id = @favoritos_id
-                AND movie_id = ${movieID}
-            )
+            -- Insertar favorito si no existe relación user-movie
+            IF EXISTS (SELECT 1 FROM favoritos_items WHERE user_id = ${userId} AND movie_id = ${movieID})
             BEGIN
-                INSERT INTO favoritos_items (favoritos_id, movie_id)
-                VALUES (@favoritos_id, ${movieID});
+                SELECT 'Ya está activo' AS mensaje;
             END
-
-        COMMIT TRANSACTION;
+            ELSE
+            BEGIN
+                INSERT INTO favoritos_items (user_id, movie_id)
+                VALUES (${userId}, ${movieID});
+                SELECT 'Agregado con éxito' AS mensaje;
+            END;
         `;
 
-        console.log(result);
+        // El resultado debería tener el mensaje de la última SELECT
+        const mensaje = result.recordset && result.recordset.length > 0 ? result.recordset[0].mensaje : 'Sin resultado';
 
         return new Response(JSON.stringify({
             code: 200,
-            message: 'Favorito actualizado con éxito',
+            message: mensaje,
         }), { status: 200 });
 
     } catch (error) {
         console.error(error);
         return new Response(JSON.stringify({
             code: 500,
-            message: 'Error update-favorito en base de datos'
+            message: 'Error en base de datos'
         }), { status: 500 });
     }
 }
 
-export { getFavoritos , addFavoritos };
+async function deleteFavoritos(request) {
+    try {
+        const data = await request.json();
+        const { userId, movieID } = data;
+
+        const result = await sql.query`
+            IF EXISTS (SELECT 1 FROM favoritos_items WHERE user_id = ${userId} AND movie_id = ${movieID})
+            BEGIN
+                DELETE FROM favoritos_items WHERE user_id = ${userId} AND movie_id = ${movieID};
+                SELECT 'Eliminado con éxito' AS mensaje;
+            END
+            ELSE
+            BEGIN
+                SELECT 'No existe en favoritos' AS mensaje;
+            END
+        `;
+
+        const mensaje = result.recordset && result.recordset.length > 0 ? result.recordset[0].mensaje : 'Sin resultados';
+console.log(`mensaje`,mensaje);
+console.log(result);
+
+        return new Response(JSON.stringify({
+            code: 200,
+            message: mensaje,
+        }), { status: 200 });
+
+    } catch (error) {
+        console.error(error);
+        return new Response(JSON.stringify({
+            code: 500,
+            message: 'Error en base de datos'
+        }), { status: 500 });
+    }
+}
+
+export { getFavoritos , addFavoritos, deleteFavoritos };

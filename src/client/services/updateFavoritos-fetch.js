@@ -4,9 +4,10 @@ export async function updateFavoritos(data, action) {
         const urlDelete = "api/favoritos/delete";
 
         const url = !action? urlAdd : urlDelete;
+        const method = !action? "POST" : "DELETE"
 
         const res = await fetch(url, {
-            method: "POST",
+            method: method,
             headers: {
                 "Content-Type": "application/json"
             },
@@ -15,6 +16,7 @@ export async function updateFavoritos(data, action) {
 
         // Convertir respuesta a JSON
         const result = await res.json();
+console.log(result);
 
         return result;
     } catch (error) {
