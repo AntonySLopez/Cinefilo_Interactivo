@@ -51,4 +51,37 @@
         sm:absolute sm:w-[25%] sm:h-[25%] border sm:top-[75%] sm:left-[8%] sm:rounded-[30px_30px_00px_0px]">
         about
         </div>
+        <section id="modal_list" class="w-full h-[90%] border fixed top-0 bg-[#11192b1c] flex justify-center items-center hidden">
+            <div class="w-[80%] h-[80%] border bg-white  rounded-xl">
+                <form id="form-list" class="flex items-center flex-col gap-4 p-3 w-full h-full">
+                    <h3 class="text-[2rem] ">Agregar a lista</h3>
+                    <label for="newList">Crear nueva lista</label>
+                    <div>
+                        <input type="text" name="newList" id="newList" placeholder="Crear nueva lista" class="border px-2 rounded-xl "> 
+                        <button id="addList" class="border px-2 rounded-2xl bg-green-400 hover:bg-amber-700">ADD</button>
+                    </div>
+                    <section class="border rounded p-2 w-[90%] h-[60%] ">
+                        Sin lista creadas
+                    </section>
+                    <button type="submit" class="border p-2 rounded-3xl hover:bg-amber-300">Completo</button>
+                </form>
+                <button id="btn-close" class="w-[7vh] h-[7vh] text-3xl grid place-content-center absolute top-[15%] right-[11%] border rounded-[100%] bg-red-600">x</button>
+            </div>
+        </section>
     </section>
+
+    <script>
+import mod from "astro/zod";
+
+        const btnClose = document.getElementById("btn-close");
+        const actionList = document.getElementById("action-list");
+        const modalList = document.getElementById("modal_list")
+
+        actionList?.addEventListener('click', ()=>{
+            modalList?.classList.toggle("hidden");
+        })
+        btnClose?.addEventListener('click', ()=>{
+            modalList?.classList.toggle("hidden")
+        })
+
+    </script>
