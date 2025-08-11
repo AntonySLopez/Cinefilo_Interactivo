@@ -40,26 +40,42 @@ async function getlistas(request) {
 };
 
 
-async function updatelistas(request) {
+async function addLista(request) {
     try {
         const data = await request.json();
 
-        if(data == 12346){
-            return new Response(JSON.stringify({
-            code: 300,
-            message: 'error de token',
-            data:tokenCheck.recordset
-        }), { status: 200 });
-        }
+        const { idUser, nameList } = data
 
-        const tokenCheck = await sql.query`
-            SELECT * FROM listas
+        const res = await sql.query`
+            BEGIN TRANSACTION;
+
+            IF EXISTS (
+                SELECT 1
+                FROM Lists
+                WHERE user_id = ${idUser}
+                AND name = ${nameList}
+            )
+            BEGIN
+                SELECT 'lista ya existe' AS mensaje;
+            END
+            ELSE
+            BEGIN
+                INSERT INTO Lists (user_id, name)
+                VALUES (${idUser}, ${nameList});
+
+                SELECT 'lista creada' AS mensaje;
+            END
+
+            COMMIT TRANSACTION;
         `;
+        const result = await res
+        console.log(result.recordset);
+        
 
         return new Response(JSON.stringify({
             code: 200,
-            message: 'Favorito actualizado con éxito',
-            data:tokenCheck.recordset
+            message: 'Nueva lista agregada',
+            data:result
         }), { status: 200 });
 
     } catch (error) {
@@ -73,4 +89,4 @@ async function updatelistas(request) {
 
 
 
-export { getlistas , updatelistas };
+export { getlistas , addLista };

@@ -9,7 +9,6 @@ export async function updateFavoritos(data, action) {
         const res = await fetch(url, {
             method: method,
             headers: {
-                "Content-Type": "application/json"
             },
             body: JSON.stringify(data)
         });

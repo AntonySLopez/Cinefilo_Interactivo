@@ -1,7 +1,7 @@
 //creamos dbTemporal contenedor de populares en prueva
 export let dbMovieTemporal = [];
 
-
+export let dbUser = []
 
 /*
 

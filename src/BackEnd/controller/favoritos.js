@@ -42,30 +42,33 @@ async function getFavoritos(request) {
 async function addFavoritos(request) {
     try {
         const data = await request.json();
-        const { userId, movieID, titulo, poster, baner } = data;
+        const { idUser, nameList } = data;
 
 
         // Ejecutamos la query que hace ambas cosas
-        const result = await sql.query`
-            -- Insertar movie si no existe
-            IF NOT EXISTS (SELECT 1 FROM Movies WHERE movie_id = ${movieID})
-            BEGIN
-                INSERT INTO Movies (movie_id, movie_name, poster, baner)
-                VALUES (${movieID}, ${titulo}, ${poster}, ${baner});
-            END;
+       const result = await sql.query`
+            BEGIN TRANSACTION;
 
-            -- Insertar favorito si no existe relación user-movie
-            IF EXISTS (SELECT 1 FROM favoritos_items WHERE user_id = ${userId} AND movie_id = ${movieID})
+            IF EXISTS (
+                SELECT 1
+                FROM Lists
+                WHERE user_id = ${idUser}
+                AND name = ${nameList}
+            )
             BEGIN
-                SELECT 'Ya está activo' AS mensaje;
+                SELECT 'lista ya existe' AS mensaje;
             END
             ELSE
             BEGIN
-                INSERT INTO favoritos_items (user_id, movie_id)
-                VALUES (${userId}, ${movieID});
-                SELECT 'Agregado con éxito' AS mensaje;
-            END;
+                INSERT INTO Lists (user_id, name)
+                VALUES (${idUser}, ${nameList});
+
+                SELECT 'lista creada' AS mensaje;
+            END
+
+            COMMIT TRANSACTION;
         `;
+
 
         // El resultado debería tener el mensaje de la última SELECT
         const mensaje = result.recordset && result.recordset.length > 0 ? result.recordset[0].mensaje : 'Sin resultado';
@@ -90,7 +93,7 @@ async function deleteFavoritos(request) {
         const { userId, movieID } = data;
 
         const result = await sql.query`
-            IF EXISTS (SELECT 1 FROM favoritos_items WHERE user_id = ${userId} AND movie_id = ${movieID})
+            IF EXISTS (SELECT 1 FROM favoritos WHERE user_id = ${userId} AND movie_id = ${movieID})
             BEGIN
                 DELETE FROM favoritos_items WHERE user_id = ${userId} AND movie_id = ${movieID};
                 SELECT 'Eliminado con éxito' AS mensaje;
