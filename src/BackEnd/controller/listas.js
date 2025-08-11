@@ -87,6 +87,60 @@ async function addLista(request) {
     }
 }
 
+async function deleteLista(request) {
+    try {
+        const data = await request.json();
+
+        const { idUser, nameList } = data;
+
+        const res = await sql.query`
+            BEGIN TRANSACTION;
+
+            DECLARE @list_id INT;
+
+            -- Verificar si existe la lista y obtener su ID
+            SELECT @list_id = list_id
+            FROM Lists
+            WHERE user_id = ${idUser}
+              AND name = ${nameList};
+
+            IF @list_id IS NULL
+            BEGIN
+                SELECT 'lista no existe' AS mensaje;
+            END
+            ELSE
+            BEGIN
+                -- Borrar primero los items asociados
+                DELETE FROM List_items
+                WHERE list_id = @list_id;
+
+                -- Borrar la lista
+                DELETE FROM Lists
+                WHERE list_id = @list_id;
+
+                SELECT 'lista eliminada' AS mensaje;
+            END
+
+            COMMIT TRANSACTION;
+        `;
+
+        const result = await res;
+
+        return new Response(JSON.stringify({
+            code: 200,
+            message: 'Lista eliminada con éxito',
+            data: result.recordset
+        }), { status: 200 });
+
+    } catch (error) {
+        console.error(error);
+        return new Response(JSON.stringify({
+            code: 500,
+            message: 'Error delete-listas en base de datos'
+        }), { status: 500 });
+    }
+}
 
 
-export { getlistas , addLista };
+
+export { getlistas , addLista, deleteLista };
